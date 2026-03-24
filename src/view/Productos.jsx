@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const Categorias = () => {
+const Productos = () => {
   return (
     <Container className="mt-3">
       <h2>Productos</h2>

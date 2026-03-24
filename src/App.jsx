@@ -21,9 +21,9 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<RutaProtegida><Inicio /></RutaProtegida>} />
           <Route path="/categorias" element={<RutaProtegida><Categorias /></RutaProtegida>} />
-          <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/catalogo" element={<RutaProtegida><Catalogo /></RutaProtegida>} />
           <Route path="/productos" element={<RutaProtegida><Productos /></RutaProtegida>} />
-          <Route path="*" element={<Pagina404 />} />
+          <Route path="*" element={<RutaProtegida><Pagina404 /></RutaProtegida>} />
         </Routes>
       </div>
     </Router>

@@ -52,13 +52,45 @@ const Encabezado = () => {
     if (esCatalogo) {
       contenidoMenu = (
         <Nav className="ms-auto pe-2">
-          <Nav.Link 
+         
+
+           <Nav.Link 
+              onClick={() => manejarNavegacion("/")} 
+              className={mostrarMenu ? "color-texto-marca" : "text-white"}
+            >
+              {mostrarMenu ? <i className="bi-house-fill me-2"></i> : null}
+              <strong>Inicio</strong>
+            </Nav.Link>
+            
+            <Nav.Link 
+              onClick={() => manejarNavegacion("/categorias")} 
+              className={mostrarMenu ? "color-texto-marca" : "text-white"}
+            >
+              {mostrarMenu ? <i className="bi-bookmark-fill me-2"></i> : null}
+              <strong>Categorías</strong>
+            </Nav.Link>
+            
+            <Nav.Link 
+              onClick={() => manejarNavegacion("/productos")} 
+              className={mostrarMenu ? "color-texto-marca" : "text-white"}
+            >
+              {mostrarMenu ? <i className="bi-bag-heart-fill me-2"></i> : null}
+              <strong>Productos</strong>
+            </Nav.Link>
+            
+             <Nav.Link 
             onClick={() => manejarNavegacion("/catalogo")} 
             className={mostrarMenu ? "color-texto-marca" : "text-white"}
           >
-            <i className="bi-images me-2"></i>
             <strong>Catálogo</strong>
           </Nav.Link>
+
+              <Nav.Link 
+                onClick={cerrarSesion} 
+                className={mostrarMenu ? "color-texto-marca" : "text-white"}
+              >
+                <i className="bi-box-arrow-right me-2"></i>
+              </Nav.Link>
         </Nav>
       );
     } else {
@@ -94,7 +126,6 @@ const Encabezado = () => {
               onClick={() => manejarNavegacion("/catalogo")} 
               className={mostrarMenu ? "color-texto-marca" : "text-white"}
             >
-              {mostrarMenu ? <i className="bi-images me-2"></i> : null}
               <strong>Catálogo</strong>
             </Nav.Link>
             
