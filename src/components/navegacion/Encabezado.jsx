@@ -181,7 +181,7 @@ const Encabezado = () => {
             height="45" 
             className="d-inline-block me-2" 
           />
-          <strong><h4 className="mb-0">Discosa</h4></strong>
+          <strong><h4 className="mb-0">IlianaAlvarez</h4></strong>
         </Navbar.Brand>
 
         {/* Botón del menú */}
@@ -200,7 +200,7 @@ const Encabezado = () => {
           onHide={() => setMostrarMenu(false)}
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Menú Discosa</Offcanvas.Title>
+            <Offcanvas.Title>Menú LIli</Offcanvas.Title>
           </Offcanvas.Header>
           
           <Offcanvas.Body>
