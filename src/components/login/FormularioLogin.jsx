@@ -10,7 +10,7 @@ const FormularioLogin = ({
   iniciarSesion,
 }) => {
   const handleSubmit = (e) => {
-    e.preventDefault(); // 👈 evita recargar la página
+    e.preventDefault(); 
     iniciarSesion();
   };
 
