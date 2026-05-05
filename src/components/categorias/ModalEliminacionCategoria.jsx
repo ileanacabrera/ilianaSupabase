@@ -1,34 +1,63 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { supabase } from "../../database/supabaseconfig";
 
-const ModalEliminacionCategoria = ({
+const ModalEliminacionProducto = ({
   mostrarModalEliminacion,
   setMostrarModalEliminacion,
-  eliminarCategoria,
-  categoria,
+  producto,
+  recargarProductos,
 }) => {
 
   const [deshabilitado, setDeshabilitado] = useState(false);
 
   const handleEliminar = async () => {
     if (deshabilitado) return;
-    setDeshabilitado(true);
-    await eliminarCategoria();
-    setDeshabilitado(false);
+
+    try {
+      setDeshabilitado(true);
+
+      // 🔥 1. Eliminar imagen del storage
+      if (producto?.url_imagen) {
+        const nombreArchivo = producto.url_imagen.split("/").pop();
+        await supabase.storage
+          .from("imagenes_productos")
+          .remove([nombreArchivo]);
+      }
+
+      // 🔥 2. Eliminar producto de la BD
+      const { error } = await supabase
+        .from("productos")
+        .delete()
+        .eq("id_producto", producto.id_producto);
+
+      if (error) throw error;
+
+      // 🔥 3. Cerrar y recargar
+      setMostrarModalEliminacion(false);
+      recargarProductos();
+
+    } catch (err) {
+      console.error(err);
+      alert("Error al eliminar producto");
+    } finally {
+      setDeshabilitado(false);
+    }
   };
 
   return (
-     <Modal
+    <Modal
       show={mostrarModalEliminacion}
       onHide={() => setMostrarModalEliminacion(false)}
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title>Eliminar Categoría</Modal.Title>
+        <Modal.Title>Eliminar Producto</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        ¿Estás seguro que deseas eliminar esta categoría?
+        ¿Estás seguro que deseas eliminar el producto{" "}
+        <strong>{producto?.nombre_producto}</strong>?
       </Modal.Body>
 
       <Modal.Footer>
@@ -44,12 +73,11 @@ const ModalEliminacionCategoria = ({
           onClick={handleEliminar}
           disabled={deshabilitado}
         >
-          Eliminar
+          {deshabilitado ? "Eliminando..." : "Eliminar"}
         </Button>
       </Modal.Footer>
     </Modal>
-    
   );
 };
 
-export default ModalEliminacionCategoria;
+export default ModalEliminacionProducto;
